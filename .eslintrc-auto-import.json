@@ -48,6 +48,21 @@
     "useRouter": true,
     "useSlots": true,
     "watch": true,
-    "watchEffect": true
+    "watchEffect": true,
+    "Component": true,
+    "ComponentPublicInstance": true,
+    "ComputedRef": true,
+    "InjectionKey": true,
+    "PropType": true,
+    "Ref": true,
+    "VNode": true,
+    "isProxy": true,
+    "isReactive": true,
+    "onBeforeRouteLeave": true,
+    "onBeforeRouteUpdate": true,
+    "toValue": true,
+    "useLink": true,
+    "watchPostEffect": true,
+    "watchSyncEffect": true
   }
 }

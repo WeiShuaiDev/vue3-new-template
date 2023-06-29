@@ -5,9 +5,9 @@ interface YWZRequestConfig<T> extends RequestConfig {
   data?: T
 }
 interface YWZResponse<T> {
-  statusCode: number
-  desc: string
-  result: T
+  errorCode: number
+  errorMsg: string
+  data: T
 }
 
 const request = new Request({

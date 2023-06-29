@@ -13,13 +13,35 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useCountStore } from '@/store'
+import { computed, onMounted } from 'vue'
+import { useCountStore } from './store'
 import { storeToRefs } from 'pinia'
+import request from './service'
 const countStore = useCountStore()
 // 通过计算属性
 const countComputed = computed(() => countStore.count)
 // 通过 storeToRefs api 结构
 const { doubleCount } = storeToRefs(countStore)
+
+const getArticleListPage = () => {
+  return request<any, any>({
+    url: '/api/article/list/0/json',
+    method: 'GET',
+    interceptors: {
+      requestInterceptors(res) {
+        console.log('接口请求拦截')
+        return res
+      },
+      responseInterceptors(result) {
+        console.log('接口响应拦截')
+        return result
+      },
+    },
+  })
+}
+onMounted(async () => {
+  const res = await getArticleListPage()
+  console.log(res)
+})
 </script>
 <style scoped></style>
