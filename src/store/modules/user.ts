@@ -31,10 +31,10 @@ export const useUserStore = defineStore({
   // actions
   actions: {
     async getData() {
-      this.userList = (await getUserList()).result
-      this.permissionList = (await getPermissionList()).result
-      this.roleList = (await getRoleList()).result
-      this.userDetail = (await getUserDetail({ id: this.curId })).result
+      this.userList = (await getUserList()).data
+      this.permissionList = (await getPermissionList()).data
+      this.roleList = (await getRoleList()).data
+      this.userDetail = (await getUserDetail({ id: this.curId })).data
       // 动态添加路由
       if (this.menuList) {
         const routes = await menuToRoutes(this.menuList)

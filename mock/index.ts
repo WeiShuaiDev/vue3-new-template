@@ -30,9 +30,9 @@ const mockList: MockMethod[] = [
     response: () => {
       return {
         // 返回的结果集
-        statusCode: 200,
-        desc: '登录成功',
-        result: {
+        errorCode: 200,
+        errorMsg: '登录成功',
+        data: {
           name: '一碗周',
         },
       }
@@ -44,9 +44,9 @@ const mockList: MockMethod[] = [
     statusCode: 200,
     response: () => {
       return {
-        statusCode: 200,
-        desc: '获取成功',
-        result: userList,
+        errorCode: 200,
+        errorMsg: '获取成功',
+        data: userList,
       }
     },
   },
@@ -64,9 +64,9 @@ const mockList: MockMethod[] = [
         }
       })
       return {
-        statusCode: 200,
-        desc: '获取成功',
-        result: roleList,
+        errorCode: 200,
+        errorMsg: '获取成功',
+        data: roleList,
       }
     },
   },
@@ -76,9 +76,9 @@ const mockList: MockMethod[] = [
     statusCode: 200,
     response: () => {
       return {
-        statusCode: 200,
-        desc: '获取成功',
-        result: permissionList,
+        errorCode: 200,
+        errorMsg: '获取成功',
+        data: permissionList,
       }
     },
   },
@@ -90,10 +90,10 @@ const mockList: MockMethod[] = [
       const id = query.id
       if (id === undefined) {
         return {
-          statusCode: 400,
-          desc: 'id必传',
+          errorCode: 400,
+          errorMsg: 'id必传',
           // 返回最终数据
-          result: null,
+          data: null,
         }
       }
       const _userList = JSON.parse(JSON.stringify(userList))
@@ -109,10 +109,10 @@ const mockList: MockMethod[] = [
       })
 
       return {
-        statusCode: 200,
-        desc: '获取成功',
+        errorCode: 200,
+        errorMsg: '获取成功',
         // 返回最终数据
-        result: Object.assign(user, { permissionList: listToTree(pList) }),
+        data: Object.assign(user, { permissionList: listToTree(pList) }),
       }
     },
   },

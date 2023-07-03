@@ -1,13 +1,12 @@
 import request from '/@/service'
 import { useRequest } from '/@/hooks'
 import type { IGetParams, IGetRes } from './types'
-export const getAddrs = (data: IGetParams) => {
-  return request<IGetParams, IGetRes>({
-    url: '/api/common/postcode/getAddrs',
+export const getArticleListPages = () => {
+  return request<null, IGetRes>({
+    url: '/api/article/list/0/json',
     method: 'GET',
-    data,
   })
 }
-export const useGetAddr = (data: IGetParams) => {
-  return useRequest<IGetParams>(getAddrs, data)
+export const useArticleListPages = (data: IGetParams) => {
+  return useRequest<IGetParams>(getArticleListPages, data)
 }

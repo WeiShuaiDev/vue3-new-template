@@ -1,13 +1,17 @@
 import Request from './request'
+import { AxiosResponse } from 'axios'
 
 import type { RequestConfig } from './request/types'
-interface HttpRequestConfig<T> extends RequestConfig {
-  data?: T
+
+export interface Response<T> {
+  errorCode: number
+  errorMsg: string
+  data: T
 }
-interface Response<T> {
-  statusCode: number
-  desc: string
-  result: T
+
+// 重写返回类型
+interface HttpRequestConfig<T, R> extends RequestConfig<Response<R>> {
+  data?: T
 }
 
 const request = new Request({
@@ -17,18 +21,20 @@ const request = new Request({
     // 请求拦截器
     requestInterceptors: config => config,
     // 响应拦截器
-    responseInterceptors: result => result,
+    responseInterceptors: (result: AxiosResponse) => {
+      return result
+    },
   },
 })
 
 /**
  * @description: 函数的描述
- * @interface D 请求参数的interface
- * @interface T 响应结构的intercept
+ * @generic D 请求参数
+ * @generic T 响应结构
  * @param {HttpRequestConfig} config 不管是GET还是POST请求都使用data
  * @returns {Promise}
  */
-const httpRequest = <D, T = any>(config: HttpRequestConfig<D>) => {
+const httpRequest = <D = any, T = any>(config: HttpRequestConfig<D, T>) => {
   const { method = 'GET' } = config
   if (method === 'get' || method === 'GET') {
     config.params = config.data

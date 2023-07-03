@@ -10,7 +10,7 @@ class Request {
   // axios 实例
   instance: AxiosInstance
   // 拦截器对象
-  interceptorsObj?: RequestInterceptors
+  interceptorsObj?: RequestInterceptors<AxiosResponse>
 
   /*
   存放取消方法的集合
@@ -81,7 +81,7 @@ class Request {
     sourceIndex !== -1 &&
       this.cancelRequestSourceList?.splice(sourceIndex as number, 1)
   }
-  request<T>(config: RequestConfig): Promise<T> {
+  request<T>(config: RequestConfig<T>): Promise<T> {
     return new Promise((resolve, reject) => {
       // 如果我们为单个请求设置拦截器，这里使用单个请求的拦截器
       if (config.interceptors?.requestInterceptors) {
@@ -91,6 +91,7 @@ class Request {
       // url存在保存取消请求方法和当前请求url
       if (url) {
         this.requestUrlList?.push(url)
+        // TODO 在axios0.22起，对CancelToken已经弃用，需要改成  AbortController 文档：https://axios-http.com/docs/cancellation
         config.cancelToken = new axios.CancelToken(c => {
           this.cancelRequestSourceList?.push({
             [url]: c,
@@ -102,7 +103,7 @@ class Request {
         .then(res => {
           // 如果我们为单个响应设置拦截器，这里使用单个响应的拦截器
           if (config.interceptors?.responseInterceptors) {
-            res = config.interceptors.responseInterceptors<T>(res)
+            res = config.interceptors.responseInterceptors(res)
           }
 
           resolve(res)

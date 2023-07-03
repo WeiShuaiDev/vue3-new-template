@@ -20,7 +20,3 @@ export interface IUseRequestRequest<D, T> {
   run: (...args: any[]) => Promise<void>
   runParams: (params: D) => Promise<void>
 }
-export interface IWhyRequest<T> {
-  code: number
-  data: T
-}
