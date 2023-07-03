@@ -1,13 +1,13 @@
 import Request from './request'
 
 import type { RequestConfig } from './request/types'
-interface YWZRequestConfig<T> extends RequestConfig {
+interface HttpRequestConfig<T> extends RequestConfig {
   data?: T
 }
-interface YWZResponse<T> {
-  errorCode: number
-  errorMsg: string
-  data: T
+interface Response<T> {
+  statusCode: number
+  desc: string
+  result: T
 }
 
 const request = new Request({
@@ -25,15 +25,15 @@ const request = new Request({
  * @description: 函数的描述
  * @interface D 请求参数的interface
  * @interface T 响应结构的intercept
- * @param {YWZRequestConfig} config 不管是GET还是POST请求都使用data
+ * @param {HttpRequestConfig} config 不管是GET还是POST请求都使用data
  * @returns {Promise}
  */
-const ywzRequest = <D, T = any>(config: YWZRequestConfig<D>) => {
+const httpRequest = <D, T = any>(config: HttpRequestConfig<D>) => {
   const { method = 'GET' } = config
   if (method === 'get' || method === 'GET') {
     config.params = config.data
   }
-  return request.request<YWZResponse<T>>(config)
+  return request.request<Response<T>>(config)
 }
 // 取消请求
 export const cancelRequest = (url: string | string[]) => {
@@ -44,4 +44,4 @@ export const cancelAllRequest = () => {
   return request.cancelAllRequest()
 }
 
-export default ywzRequest
+export default httpRequest

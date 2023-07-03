@@ -16,8 +16,12 @@
     "baseUrl": ".",
     "paths": {
       // 用于设置模块名到基于baseUrl的路径映射
-      "@/*": [ "src/*" ],
-      "cpns/*": [ "src/components/*" ]
+      "/@/*": [
+        "src/*"
+      ],
+      "/cpns/*": [
+        "src/components/*"
+      ]
     },
     "types": ["element-plus/global"]
   },

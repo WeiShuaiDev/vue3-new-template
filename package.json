@@ -20,8 +20,13 @@
     ]
   },
   "dependencies": {
+    "animate.css": "^4.1.1",
     "axios": "^1.2.0-alpha.1",
     "element-plus": "^2.3.7",
+    "gsap": "^3.0.0-beta.11",
+    "husky-init": "^8.0.0",
+    "install": "^0.13.0",
+    "lodash": "^4.17.21",
     "pinia": "^2.0.0-rc.10",
     "vue": "^3.2.45",
     "vue-router": "^4.0.13",
